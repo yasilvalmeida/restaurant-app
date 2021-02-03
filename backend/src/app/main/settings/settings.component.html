@@ -1,0 +1,132 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+
+    <!-- HEADER -->
+    <div class="header accent p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="center start">
+            <div class="h1 mt-16">
+                <mat-icon class="secondary-text s-18">settings</mat-icon>
+                Settings
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <div class="horizontal-stepper-wrapper">
+
+            <!-- HORIZONTAL STEPPER EXAMPLE -->
+            <mat-horizontal-stepper class="mat-elevation-z4" #stepper [selectedIndex]="_currentStep" [linear]="true">
+
+                <mat-step [stepControl]="_generalInformationForm">
+                
+                    <form fxLayout="column" [formGroup]="_generalInformationForm">
+                
+                        <ng-template matStepLabel>General Information</ng-template>
+                
+                        <div fxFlex="1 0 auto" fxLayout="column">
+                
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="generalName" required>
+                                <mat-error>Name is required!</mat-error>
+                            </mat-form-field>
+                
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Title</mat-label>
+                                <input matInput formControlName="title" required>
+                                <mat-error>Title is required!</mat-error>
+                            </mat-form-field>
+                
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Version</mat-label>
+                                <input matInput formControlName="version" required>
+                                <mat-error>Version is required!</mat-error>
+                            </mat-form-field>
+                
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="generalDescription" required>
+                                </textarea>
+                                <mat-error>Description is required!</mat-error>
+                            </mat-form-field>
+                
+                        </div>
+                
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Next
+                            </button>
+                        </div>
+                
+                    </form>
+                
+                </mat-step>
+                
+                <mat-step [stepControl]="_deviceInformationForm">
+
+                    <form fxLayout="column" [formGroup]="_deviceInformationForm">
+
+                        <ng-template matStepLabel>Device Information</ng-template>
+
+                        <div fxFlex="1 0 auto" fxLayout="column">
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="deviceName" required>
+                                <mat-error>Name is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="deviceDescription" required>
+                                </textarea>
+                                <mat-error>Description is required!</mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Previous
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Next
+                            </button>
+                        </div>
+
+                    </form>
+
+                </mat-step>
+
+                <mat-step>
+
+                    <ng-template matStepLabel>Done</ng-template>
+
+                    <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                        Do you want to update settings information?
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button type="button" color="accent" (click)="update()">
+                            Confirm
+                        </button>
+                    </div>
+
+                </mat-step>
+
+            </mat-horizontal-stepper>
+            <!-- / HORIZONTAL STEPPER EXAMPLE -->
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
+
+

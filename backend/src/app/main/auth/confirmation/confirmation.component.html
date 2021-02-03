@@ -1,0 +1,32 @@
+<div id="confirmation" fxLayout="column">
+
+    <div id="confirmation-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+        <div id="confirmation-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+            <div class="logo">
+                <mat-icon class="mat-accent s-96">email</mat-icon>
+            </div>
+
+            <div class="title">
+                {{ title }}
+            </div>
+
+            <div class="subtitle">
+                <p>
+                    {{ firstParagraph }}
+                </p>
+                <p>
+                    {{ secondParagraph }}
+                </p>
+            </div>
+
+            <div class="message">
+                <a class="link" [routerLink]="'/login'">Go back to login page</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

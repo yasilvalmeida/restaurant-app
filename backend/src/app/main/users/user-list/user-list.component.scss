@@ -1,0 +1,63 @@
+@import "src/@fuse/scss/fuse";
+
+user-list {
+    /* display: flex;
+    //flex: 1 1 auto;
+    width: 100%; */
+    flex: 1 1 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .mat-table {
+        width: 100%;
+        background: transparent;
+        box-shadow: none;
+
+        .mat-column-checkbox {
+            flex: 0 1 50px;
+            padding-left: 15px;
+        }
+
+        .mat-column-role {
+            padding-left: 15px;
+        }
+
+        .mat-column-buttons {
+            flex: 0 1 50px;
+        }
+
+        .mat-row {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+
+            .mat-cell {
+                min-width: 0;
+
+                &.mat-column-detail-button {
+                    flex: 0 1 auto;
+                    padding: 0 24px 0 0;
+
+                    @include media-breakpoint('gt-md') {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#add-user-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 0;
+    z-index: 99;
+
+    @include media-breakpoint('xs') {
+        position: sticky;
+        top: calc(100vh - 120px);
+        bottom: auto;
+    }
+}

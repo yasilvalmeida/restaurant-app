@@ -1,0 +1,187 @@
+<div id="about" class="p-24" fxLayout="row wrap">
+
+    <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+
+        <div class="profile-box info-box general" fxLayout="column">
+
+            <header class="accent">
+                <div class="title">General Information</div>
+            </header>
+
+            <form name="_profileForm" [formGroup]="_profileForm" novalidate>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Fullname</mat-label>
+                    <input matInput formControlName="fullname">
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <mat-error>
+                        Fullname is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" readonly>
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="_profileForm.get('email').hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="_profileForm.get('email').hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Type your password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!_profileForm.get('password').hasError('required') &&
+                                _profileForm.get('password').hasError('pattern')">
+                        Password must contain 1 uppercase, 1 lowercase, 1 digit and 1 special character
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <ngx-mat-file-input formControlName="avatar" (change)="handleFileInput($event.target.files)" #file type="file" placeholder="Avatar" accept="image/png">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>image_search</mat-icon>
+                    <mat-error>
+                        Avatar is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <input matInput formControlName="role" readonly>
+                    <mat-icon matSuffix class="secondary-text">security</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Created at</mat-label>
+                    <input matInput formControlName="created" readonly>
+                    <mat-icon matSuffix class="secondary-text">event_available</mat-icon>
+                </mat-form-field>
+
+                <button (click)="updateProfile()" mat-raised-button color="accent" class="submit-button" aria-label="UPDATE"
+                        [disabled]="_profileForm.invalid">
+                    UPDATE
+                </button>
+
+                <mat-error *ngIf="_errorMessage != ''">
+                    <p fxLayoutAlign="center center">
+                        {{ _errorMessage }}
+                    </p>
+                </mat-error>
+
+            </form>
+            <div class="content">
+                
+                <!-- <div class="info-line">
+                    <div class="title">Fullname</div>
+                    <div class="info">{{ _fullname }}</div>
+                </div>
+
+                <div class="info-line">
+                    <div class="title">Email address</div>
+                    <div class="info">{{ _email }}</div>
+                </div>
+
+                <div class="info-line">
+                    <div class="title">Role</div>
+                    <div class="info">{{ _role }}</div>
+                </div> -->
+            </div>
+            
+
+        </div>
+
+        <!-- <div class="profile-box info-box work" fxLayout="column">
+
+            <header class="accent">
+                <div class="title">Work</div>
+            </header>
+
+            <div class="content">
+                <div class="info-line">
+                    <div class="title">Occupation</div>
+                    <div class="info">about.work.occupation</div>
+                </div>
+
+                <div class="info-line">
+                    <div class="title">Skills</div>
+                    <div class="info">about.work.skills</div>
+                </div>
+
+                <div class="info-line">
+                    <div class="title">Jobs</div>
+                    <table class="info jobs">
+                        <tr class="job" >
+                            <td class="company">job.company</td>
+                            <td class="date">job.date</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="profile-box info-box contact" fxLayout="column">
+
+            <header class="accent">
+                <div class="title">Contact</div>
+            </header>
+
+            <div class="content">
+                <div class="info-line">
+                    <div class="title">Address</div>
+                    <div class="info">about.contact.address</div>
+                </div>
+                <div class="info-line">
+                    <div class="title">Tel.</div>
+                    <div class="info" >
+                        <span>tel</span>
+                    </div>
+                </div>
+                <div class="info-line">
+                    <div class="title">Website</div>
+                    <div class="info" >
+                        <span>website</span>
+                    </div>
+                </div>
+                <div class="info-line">
+                    <div class="title">Emails</div>
+                    <div class="info" >
+                        <span>email</span>
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
+
+    </div>
+
+    <!-- <div class="about-sidebar" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="35">
+
+        <div class="profile-box friends" fxLayout="column">
+
+            <header class="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="title">Friends</div>
+                <div class="more secondary-text">
+                    <span>See 454 more...</span>
+                </div>
+            </header>
+
+            <div class="content" fxLayout="row wrap">
+                <div class="friend" fxFlex="20" >
+                    <img src="_avatar">
+                </div>
+            </div>
+
+        </div>
+
+    </div> -->
+
+</div>

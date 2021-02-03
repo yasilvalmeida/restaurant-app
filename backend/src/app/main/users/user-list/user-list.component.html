@@ -1,0 +1,101 @@
+<mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="checkbox">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <mat-checkbox [(ngModel)]="checkboxes[user._id]" (ngModelChange)="onSelectedChange(user._id)"
+                (click)="$event.stopPropagation()">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Avatar Column -->
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <img class="avatar" *ngIf="user.avatar" [alt]="user.fullname" [src]="user.avatar" />
+        </mat-cell>
+    </ng-container>
+
+    <!-- Fullname Column -->
+    <ng-container matColumnDef="fullname">
+        <mat-header-cell *matHeaderCellDef>Fullname</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <p class="fullname text-truncate font-weight-600">{{user.fullname}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user" fxHide fxShow.gt-sm>
+            <p class="email text-truncate">
+                {{user.email}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Role</mat-header-cell>
+        <mat-cell *matCellDef="let user" fxHide fxShow.gt-md>
+            <p class="role text-truncate">
+                {{user.role}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Active Column -->
+    <ng-container matColumnDef="isActive">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Active</mat-header-cell>
+        <mat-cell *matCellDef="let user" fxHide fxShow.gt-md>
+            <mat-icon matSuffix *ngIf="user.isActive">check_box</mat-icon>
+            <mat-icon matSuffix *ngIf="!user.isActive">check_box_outline_blank</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Buttons Column -->
+    <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <div fxFlex="row" fxLayoutAlign="end center">
+
+                <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                    (click)="$event.stopPropagation();">
+                    <mat-icon class="secondary-text">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #moreMenu="matMenu">
+
+                    <button mat-menu-item aria-label="resetPassword" (click)="resetPassword(user)">
+                        <mat-icon>security</mat-icon>
+                        <span>Reset Password</span>
+                    </button> 
+
+                    <button mat-menu-item aria-label="verify" (click)="verifyUser(user)">
+                        <mat-icon>security</mat-icon>
+                        <span>Verify</span>
+                    </button>
+
+                    <button mat-menu-item aria-label="remove" (click)="deleteUser(user)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Remove</span>
+                    </button>
+
+                </mat-menu>
+            </div>
+
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let user; columns: displayedColumns;" class="user" (click)="editUser(user)"
+        [ngClass]="{'accent-50':checkboxes[user._id]}" [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+
+</mat-table>
+
+<mat-paginator *ngIf="_usersService.users" [length]="_usersService.users.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    (page)="onPaginatorChange($event)">
+</mat-paginator>
