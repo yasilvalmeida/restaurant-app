@@ -67,7 +67,7 @@ export class AuthService {
         this._errorMessage = error.error.error.details[0].message;
     }
     console.log(error);
-    // Return an observable with a user-facing error message.
+    // Return an observable with a user-facing error message
     return throwError(this._errorMessage);
   }
   // Register a user
