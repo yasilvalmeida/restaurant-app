@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
       if (token == undefined || 
         token == "" ||
         token == null) {
-          
           return false;
         }
       /* if (this.user && this.user.profile.role == 'Guest') {
